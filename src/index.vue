@@ -53,7 +53,12 @@ export default {
     };
   },
   mounted() {
-    if (this.autoinit) this.initialize();
+    const smde = () => import('simplemde');
+    smde.then((res) => {
+      const SimpleMDE = res.default;
+      this.initialize();
+    });
+    //if (this.autoinit) this.initialize();
   },
   deactivated() {
     const editor = this.simplemde;

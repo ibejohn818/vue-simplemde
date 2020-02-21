@@ -846,7 +846,7 @@ module.exports = function (exec) {
 /***/ "8378":
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.6.9' };
+var core = module.exports = { version: '2.6.11' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -1169,12 +1169,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"21899888-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=6afa4194&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"583a2545-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=79298ac0&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-simplemde"},[_c('textarea',{staticClass:"vue-simplemde-textarea",attrs:{"name":_vm.name},domProps:{"value":_vm.modelVal},on:{"input":function($event){return _vm.handleInput($event.target.value)}}})])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=6afa4194&
+// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=79298ac0&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
 var es6_object_assign = __webpack_require__("f751");
@@ -1242,7 +1242,17 @@ var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked
     };
   },
   mounted: function mounted() {
-    if (this.autoinit) this.initialize();
+    var _this = this;
+
+    var smde = function smde() {
+      return Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, "36ee", 7));
+    };
+
+    smde.then(function (res) {
+      var SimpleMDE = res.default;
+
+      _this.initialize();
+    }); //if (this.autoinit) this.initialize();
   },
   deactivated: function deactivated() {
     var editor = this.simplemde;
@@ -1281,12 +1291,12 @@ var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked
       this.bindingEvents();
     },
     bindingEvents: function bindingEvents() {
-      var _this = this;
+      var _this2 = this;
 
       this.simplemde.codemirror.on('change', function () {
-        var val = _this.simplemde.value();
+        var val = _this2.simplemde.value();
 
-        _this.handleInput(val);
+        _this2.handleInput(val);
       });
     },
     addPreviewClass: function addPreviewClass(className) {
@@ -1395,7 +1405,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
