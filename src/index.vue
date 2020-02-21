@@ -53,11 +53,15 @@ export default {
     };
   },
   mounted() {
-    const smde = import('simplemde');
-    smde.then((res) => {
-      const SimpleMDE = res.default;
+    if (window.SimpleMDE) {
       this.initialize();
-    });
+    } else {
+      const smde = import('simplemde');
+      smde.then((res) => {
+        window.SimpleMDE = res.default;
+        this.initialize();
+      });
+    }
     // if (this.autoinit) this.initialize();
   },
   deactivated() {
@@ -89,7 +93,7 @@ export default {
       marked.setOptions({ sanitize: this.sanitize });
 
       // 实例化编辑器
-      this.simplemde = new SimpleMDE(configs);
+      this.simplemde = new window.SimpleMDE(configs);
 
       // 添加自定义 previewClass
       const className = this.previewClass || '';
@@ -132,12 +136,3 @@ export default {
 };
 </script>
 
-<style>
-.vue-simplemde .markdown-body {
-  padding: 0.5em
-}
-
-.vue-simplemde .editor-preview-active, .vue-simplemde .editor-preview-active-side {
-  display: block;
-}
-</style>
