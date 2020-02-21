@@ -9,8 +9,52 @@
 		root["VueSimpleMDE"] = factory(root["marked"], root["SimpleMDE"]);
 })((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__1d61__, __WEBPACK_EXTERNAL_MODULE__36ee__) {
 return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		0: 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "VueSimpleMDE.umd." + ({}[chunkId]||chunkId) + ".js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -88,6 +132,16 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = (typeof self !== 'undefined' ? self : this)["webpackJsonpVueSimpleMDE"] = (typeof self !== 'undefined' ? self : this)["webpackJsonpVueSimpleMDE"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -1178,19 +1232,15 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"583a2545-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=79298ac0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"583a2545-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=7cac8692&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-simplemde"},[_c('textarea',{staticClass:"vue-simplemde-textarea",attrs:{"name":_vm.name},domProps:{"value":_vm.modelVal},on:{"input":function($event){return _vm.handleInput($event.target.value)}}})])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=79298ac0&
+// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=7cac8692&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
 var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: external {"commonjs":"simplemde","commonjs2":"simplemde","amd":"simplemde","root":"SimpleMDE"}
-var external_commonjs_simplemde_commonjs2_simplemde_amd_simplemde_root_SimpleMDE_ = __webpack_require__("36ee");
-var external_commonjs_simplemde_commonjs2_simplemde_amd_simplemde_root_SimpleMDE_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_simplemde_commonjs2_simplemde_amd_simplemde_root_SimpleMDE_);
 
 // EXTERNAL MODULE: external "marked"
 var external_marked_ = __webpack_require__("1d61");
@@ -1209,7 +1259,7 @@ var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked
 //
 //
 //
-
+// import SimpleMDE from 'simplemde';
 
 /* harmony default export */ var lib_vue_loader_options_srcvue_type_script_lang_js_ = ({
   name: 'vue-simplemde',
@@ -1253,15 +1303,12 @@ var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked
   mounted: function mounted() {
     var _this = this;
 
-    var smde = function smde() {
-      return Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, "36ee", 7));
-    };
-
+    var smde = Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, "36ee", 7));
     smde.then(function (res) {
       var SimpleMDE = res.default;
 
       _this.initialize();
-    }); //if (this.autoinit) this.initialize();
+    }); // if (this.autoinit) this.initialize();
   },
   deactivated: function deactivated() {
     var editor = this.simplemde;
@@ -1292,7 +1339,7 @@ var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked
         sanitize: this.sanitize
       }); // 实例化编辑器
 
-      this.simplemde = new external_commonjs_simplemde_commonjs2_simplemde_amd_simplemde_root_SimpleMDE_default.a(configs); // 添加自定义 previewClass
+      this.simplemde = new SimpleMDE(configs); // 添加自定义 previewClass
 
       var className = this.previewClass || '';
       this.addPreviewClass(className); // 绑定事件

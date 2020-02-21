@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import SimpleMDE from 'simplemde';
+// import SimpleMDE from 'simplemde';
 import marked from 'marked';
 
 export default {
@@ -53,12 +53,12 @@ export default {
     };
   },
   mounted() {
-    const smde = () => import('simplemde');
+    const smde = import('simplemde');
     smde.then((res) => {
       const SimpleMDE = res.default;
       this.initialize();
     });
-    //if (this.autoinit) this.initialize();
+    // if (this.autoinit) this.initialize();
   },
   deactivated() {
     const editor = this.simplemde;
