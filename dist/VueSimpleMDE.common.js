@@ -631,6 +631,158 @@ module.exports = function (it) {
 
 /***/ }),
 
+/***/ "be8f":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("f751");
+/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("1d61");
+/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(marked__WEBPACK_IMPORTED_MODULE_1__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import SimpleMDE from 'simplemde';
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  name: 'vue-simplemde',
+  props: {
+    value: String,
+    name: String,
+    previewClass: String,
+    autoinit: {
+      type: Boolean,
+      default: function _default() {
+        return true;
+      }
+    },
+    highlight: {
+      type: Boolean,
+      default: function _default() {
+        return false;
+      }
+    },
+    sanitize: {
+      type: Boolean,
+      default: function _default() {
+        return false;
+      }
+    },
+    configs: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
+    },
+    previewRender: {
+      type: Function
+    }
+  },
+  data: function data() {
+    return {
+      modelVal: ''
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (global.SimpleMDE) {
+      this.initialize();
+    } else {
+      var smde = Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, "36ee", 7));
+      smde.then(function (res) {
+        global.SimpleMDE = res.default;
+
+        _this.initialize();
+      });
+    } // if (this.autoinit) this.initialize();
+
+  },
+  deactivated: function deactivated() {
+    var editor = this.simplemde;
+    if (!editor) return;
+    var isFullScreen = editor.codemirror.getOption('fullScreen');
+    if (isFullScreen) editor.toggleFullScreen();
+  },
+  methods: {
+    initialize: function initialize() {
+      var configs = Object.assign({
+        element: this.$el.firstElementChild,
+        initialValue: this.value,
+        previewRender: this.previewRender,
+        renderingConfig: {}
+      }, this.configs); // 同步 value 和 initialValue 的值
+
+      if (configs.initialValue) {
+        this.$emit('input', configs.initialValue);
+      } // 判断是否开启代码高亮
+
+
+      if (this.highlight) {
+        configs.renderingConfig.codeSyntaxHighlighting = true;
+      } // 设置是否渲染输入的html
+
+
+      marked__WEBPACK_IMPORTED_MODULE_1___default.a.setOptions({
+        sanitize: this.sanitize
+      }); // 实例化编辑器
+
+      this.simplemde = new global.SimpleMDE(configs); // 添加自定义 previewClass
+
+      var className = this.previewClass || '';
+      this.addPreviewClass(className); // 绑定事件
+
+      this.bindingEvents();
+    },
+    bindingEvents: function bindingEvents() {
+      var _this2 = this;
+
+      this.simplemde.codemirror.on('change', function () {
+        var val = _this2.simplemde.value();
+
+        _this2.handleInput(val);
+      });
+    },
+    addPreviewClass: function addPreviewClass(className) {
+      var wrapper = this.simplemde.codemirror.getWrapperElement();
+      var preview = document.createElement('div');
+      wrapper.nextSibling.className += " ".concat(className);
+      preview.className = "editor-preview ".concat(className);
+      wrapper.appendChild(preview);
+    },
+    handleInput: function handleInput(val) {
+      this.isValueUpdateFromInner = true;
+      this.$emit('input', val);
+    }
+  },
+  destroyed: function destroyed() {
+    this.simplemde = null;
+  },
+  watch: {
+    value: function value(val) {
+      if (this.isValueUpdateFromInner) {
+        this.isValueUpdateFromInner = false;
+        return;
+      }
+
+      this.simplemde.value(val);
+      this.modelVal = val;
+    }
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
+
+/***/ }),
+
 /***/ "c366":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -667,6 +819,33 @@ module.exports = function (IS_INCLUDES) {
 module.exports = !__webpack_require__("9e1e") && !__webpack_require__("79e5")(function () {
   return Object.defineProperty(__webpack_require__("230e")('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
+
+
+/***/ }),
+
+/***/ "c8ba":
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -836,158 +1015,18 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"583a2545-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=211dace0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"583a2545-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=template&id=55df8dd5&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-simplemde"},[_c('textarea',{staticClass:"vue-simplemde-textarea",attrs:{"name":_vm.name},domProps:{"value":_vm.modelVal},on:{"input":function($event){return _vm.handleInput($event.target.value)}}})])}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=211dace0&
+// CONCATENATED MODULE: ./src/index.vue?vue&type=template&id=55df8dd5&
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
+// EXTERNAL MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=script&lang=js&
+var lib_vue_loader_options_srcvue_type_script_lang_js_ = __webpack_require__("be8f");
 
-// EXTERNAL MODULE: external "marked"
-var external_marked_ = __webpack_require__("1d61");
-var external_marked_default = /*#__PURE__*/__webpack_require__.n(external_marked_);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/index.vue?vue&type=script&lang=js&
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import SimpleMDE from 'simplemde';
-
-/* harmony default export */ var lib_vue_loader_options_srcvue_type_script_lang_js_ = ({
-  name: 'vue-simplemde',
-  props: {
-    value: String,
-    name: String,
-    previewClass: String,
-    autoinit: {
-      type: Boolean,
-      default: function _default() {
-        return true;
-      }
-    },
-    highlight: {
-      type: Boolean,
-      default: function _default() {
-        return false;
-      }
-    },
-    sanitize: {
-      type: Boolean,
-      default: function _default() {
-        return false;
-      }
-    },
-    configs: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    previewRender: {
-      type: Function
-    }
-  },
-  data: function data() {
-    return {
-      modelVal: ''
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    var smde = Promise.resolve(/* import() */).then(__webpack_require__.t.bind(null, "36ee", 7));
-    smde.then(function (res) {
-      window.SimpleMDE = res;
-
-      _this.initialize();
-    }); // if (this.autoinit) this.initialize();
-  },
-  deactivated: function deactivated() {
-    var editor = this.simplemde;
-    if (!editor) return;
-    var isFullScreen = editor.codemirror.getOption('fullScreen');
-    if (isFullScreen) editor.toggleFullScreen();
-  },
-  methods: {
-    initialize: function initialize() {
-      var configs = Object.assign({
-        element: this.$el.firstElementChild,
-        initialValue: this.value,
-        previewRender: this.previewRender,
-        renderingConfig: {}
-      }, this.configs); // 同步 value 和 initialValue 的值
-
-      if (configs.initialValue) {
-        this.$emit('input', configs.initialValue);
-      } // 判断是否开启代码高亮
-
-
-      if (this.highlight) {
-        configs.renderingConfig.codeSyntaxHighlighting = true;
-      } // 设置是否渲染输入的html
-
-
-      external_marked_default.a.setOptions({
-        sanitize: this.sanitize
-      }); // 实例化编辑器
-
-      this.simplemde = new window.SimpleMDE(configs); // 添加自定义 previewClass
-
-      var className = this.previewClass || '';
-      this.addPreviewClass(className); // 绑定事件
-
-      this.bindingEvents();
-    },
-    bindingEvents: function bindingEvents() {
-      var _this2 = this;
-
-      this.simplemde.codemirror.on('change', function () {
-        var val = _this2.simplemde.value();
-
-        _this2.handleInput(val);
-      });
-    },
-    addPreviewClass: function addPreviewClass(className) {
-      var wrapper = this.simplemde.codemirror.getWrapperElement();
-      var preview = document.createElement('div');
-      wrapper.nextSibling.className += " ".concat(className);
-      preview.className = "editor-preview ".concat(className);
-      wrapper.appendChild(preview);
-    },
-    handleInput: function handleInput(val) {
-      this.isValueUpdateFromInner = true;
-      this.$emit('input', val);
-    }
-  },
-  destroyed: function destroyed() {
-    this.simplemde = null;
-  },
-  watch: {
-    value: function value(val) {
-      if (this.isValueUpdateFromInner) {
-        this.isValueUpdateFromInner = false;
-        return;
-      }
-
-      this.simplemde.value(val);
-      this.modelVal = val;
-    }
-  }
-});
 // CONCATENATED MODULE: ./src/index.vue?vue&type=script&lang=js&
- /* harmony default export */ var srcvue_type_script_lang_js_ = (lib_vue_loader_options_srcvue_type_script_lang_js_); 
+ /* harmony default export */ var srcvue_type_script_lang_js_ = (lib_vue_loader_options_srcvue_type_script_lang_js_["a" /* default */]); 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 

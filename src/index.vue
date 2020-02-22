@@ -53,12 +53,12 @@ export default {
     };
   },
   mounted() {
-    if (window.SimpleMDE) {
+    if (global.SimpleMDE) {
       this.initialize();
     } else {
       const smde = import('simplemde');
       smde.then((res) => {
-        window.SimpleMDE = res.default;
+        global.SimpleMDE = res.default;
         this.initialize();
       });
     }
@@ -93,7 +93,7 @@ export default {
       marked.setOptions({ sanitize: this.sanitize });
 
       // 实例化编辑器
-      this.simplemde = new window.SimpleMDE(configs);
+      this.simplemde = new global.SimpleMDE(configs);
 
       // 添加自定义 previewClass
       const className = this.previewClass || '';
@@ -135,4 +135,3 @@ export default {
   },
 };
 </script>
-
